@@ -19,3 +19,4 @@ class OpenFDA {
       this.unii = unii;
     }
   }
+  export default OpenFDA;

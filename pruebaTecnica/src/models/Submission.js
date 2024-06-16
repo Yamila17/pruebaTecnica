@@ -9,3 +9,4 @@ class Submission {
       this.submissionClassCodeDescription = submissionClassCodeDescription;
     }
   }
+  export default Submission;

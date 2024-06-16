@@ -11,3 +11,4 @@ class Product {
       this.teCode = teCode;
     }
   }
+  export default Product;

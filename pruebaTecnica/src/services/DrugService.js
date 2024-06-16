@@ -38,9 +38,7 @@ const DrugService = {
   },
 
   getDrugByApplicationNumber: async (applicationNumber) => {
-    const applicationNumberEncoded = encodeURIComponent(
-      `application_number:"${encodeURIComponent(applicationNumber)}"`
-    );
+    const applicationNumberEncoded = encodeURIComponent(`application_number:"${applicationNumber}"`);
 
     try {
       const response = await axios.get(
@@ -57,14 +55,10 @@ const DrugService = {
         }
       );
 
-      if (
-        response.data &&
-        response.data.results &&
-        Array.isArray(response.data.results)
-      ) {
-        return response.data.results[0];
+      if (response.data && response.data.results && Array.isArray(response.data.results)) {
+        return response.data.results;
       } else {
-        console.error('La respuesta no contiene la propiedad "results"');
+        console.error('La respuesta no contiene la propiedad "results" o no es un array');
         return null;
       }
     } catch (error) {
@@ -72,7 +66,6 @@ const DrugService = {
       return null;
     }
   }
-
 };
 
 export default DrugService;

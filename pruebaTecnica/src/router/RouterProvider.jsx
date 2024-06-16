@@ -15,7 +15,7 @@ const RouterProvider = () => {
     </Route>
 
     <Route path="/drug" element={<LayoutDrug />}>
-      <Route path="drug" element={<DrugInformation />} />
+    <Route path=":applicationNumber" element={<DrugInformation />} />
     </Route>
 
   </Routes>

@@ -27,7 +27,7 @@ const SimpleCard = ({ applicationNumber, brandName, sponsorName }) => {
           </Typography>
         </CardContent>
         <CardActions>
-        <Link  to={`/drug/${applicationNumber}`}>
+        <Link to={`/drug/${applicationNumber}`}>
           <Button size="small">Ver más</Button>
         </Link>
         </CardActions>

@@ -6,8 +6,8 @@ export const DrugHandler = {
         let drugs = await DrugService.searchDrugs()
         return drugs;
     },
-    async getDrugByapplicationNumber(){
-        let aplicationNumber = await DrugService.getDrugByApplicationNumber()
-        return aplicationNumber;
+    async getDrugByapplicationNumber(applicationNumber){
+        let drugDetail = await DrugService.getDrugByApplicationNumber(applicationNumber)
+        return drugDetail;
     }
 }
