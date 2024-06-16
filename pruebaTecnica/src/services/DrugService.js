@@ -38,14 +38,14 @@ const DrugService = {
   },
 
   getDrugByApplicationNumber: async (applicationNumber) => {
-    const applicationNumberEncoded = encodeURIComponent(`application_number:"${applicationNumber}"`);
+    const applicationNumberEncoded = encodeURIComponent(applicationNumber);
 
     try {
       const response = await axios.get(
         "https://api.fda.gov/drug/drugsfda.json",
         {
           params: {
-            search: applicationNumberEncoded,
+            search: `application_number:"${applicationNumberEncoded}"`,
             limit: 1,
           },
           headers: {

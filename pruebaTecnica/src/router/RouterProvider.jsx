@@ -1,9 +1,10 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 import LayoutDrug from '../layout/LayoutDrug'
-import DrugInformation from '../pages/DrugInformation'
 import LayoutHome from '../layout/LayoutHome'
-import Home from '../pages/Home'
+import DetailCard from '../components/detailCard/DetailCard';
+import SearchBar from '../components/searchbar/SearchBar';
+import SimpleCard from '../components/simpleCard/SimpleCard';
 
 const RouterProvider = () => {
     
@@ -11,11 +12,12 @@ const RouterProvider = () => {
     <Routes>
         
     <Route path="/" element={<LayoutHome />}>
-      <Route index element={<Home />} />
+      <Route index element={<SearchBar />} />
+      <Route index element={<SimpleCard />} />
     </Route>
 
     <Route path="/drug" element={<LayoutDrug />}>
-    <Route path=":applicationNumber" element={<DrugInformation />} />
+    <Route path=":applicationNumber" element={<DetailCard />} />
     </Route>
 
   </Routes>

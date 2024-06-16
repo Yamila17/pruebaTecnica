@@ -8,11 +8,17 @@ import Typography from "@mui/material/Typography";
 import { Link } from 'react-router-dom';
 
 const SimpleCard = ({ applicationNumber, brandName, sponsorName }) => {
-  console.log('esto es applicationNumber :' + applicationNumber)
+  
   return (
 
       <Card elevation={5}  sx={{ mt: 2 }}>
         <CardContent>
+        <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+            ApplicationNumber:
+          </Typography>
+          <Typography component="div">
+            {applicationNumber}
+          </Typography>
           <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
             Marca:
           </Typography>

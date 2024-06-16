@@ -26,9 +26,7 @@ const SearchBar = () => {
         const sponsorName = item.sponsor_name;
         const brandName = item.products?.[0]?.brand_name || "";
         const route = item.products?.[0]?.route || "";
-        console.log('ESTA AQUI BRANDNAME'+brandName)
         const dosageForm = item.products?.[0]?.dosage_form;
-
         const ingredients = new DrugActiveIngredient(
           item.products[0].active_ingredients[0].name,
           item.products[0].active_ingredients[0].strength
