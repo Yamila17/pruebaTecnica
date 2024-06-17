@@ -3,16 +3,17 @@ import "./simplecard.css";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import { CardMedia, Grid } from "@mui/material";
+import { CardMedia, Container, Grid } from "@mui/material";
 import { CardHeader } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import drugImage from "./../../assets/img/drug.jpg";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const SimpleCard = ({ applicationNumber, brandName, sponsorName }) => {
   return (
-    <Card elevation={5} sx={{ mt: 2, maxWidth: "80%", margin: "auto" }}>
+    <Card elevation={5} sx={{ mt: 2, maxWidth: "80%", margin: "auto" , padding: 1}}>
       <CardContent>
         <Grid container spacing={2} direction="column">
           <Grid item xs={12}>
@@ -40,10 +41,12 @@ const SimpleCard = ({ applicationNumber, brandName, sponsorName }) => {
             </Typography>
           </Grid>
         </Grid>
-      </CardContent>    
-            <Link to={`/drug/${applicationNumber}`}>
-              <button display="flex"  justifyContent="center" className="custom-button"  >VER MÁS</button>
-            </Link>
+      </CardContent>
+      <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+      <button className="custom-button" >VER MÁS
+          <ArrowForwardIosIcon fontSize="0.5em"/>
+      </button>
+      </Container>
     </Card>
   );
 };

@@ -22,7 +22,7 @@ const LayoutHome = () => {
   return (
     <>
    
-     <CustomContainer maxWidth="xxl">
+     <CustomContainer maxWidth="xl">
       <Grid container >
         <Grid item xs={3}  >
         <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>

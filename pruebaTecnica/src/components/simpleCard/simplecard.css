@@ -1,8 +1,13 @@
 .custom-button{
-    width: 80%;
+    width: 100%;
     background-color: rgb(139 205 163);
+    color: white;
     border: none;
     border-radius: 20px;
-    padding: 10px ;
-    border-radius: 1px;
+    padding: 15px ;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
