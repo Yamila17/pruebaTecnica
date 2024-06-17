@@ -99,7 +99,8 @@ const DetailCard = () => {
 
   return (
     <>
-      {/* <TableSubmissions submissions={drugDetail.submissions} /> */}
+    Application name: PEPROIRFIKV
+      <TableSubmissions submissions={drugDetail.submissions} />
       <TableProduct products={drugDetail.products} />
     </>
   );

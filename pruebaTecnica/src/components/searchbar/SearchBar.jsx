@@ -9,6 +9,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Drug from "../../models/Drug";
 import DrugActiveIngredient from "../../models/DrugActiveIngredient";
 import { DrugHandler } from "../../handler/DrugHandler";
+import {CustomSweetAlertError} from './../components/alertComponent/AlertComponent'
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
@@ -17,13 +18,13 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
       borderColor: "transparent",
     },
     "&:hover fieldset": {
-      borderColor: "black",
+      borderColor: "rgba(0, 0, 0, 0.23)",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "black",
+      borderColor: "rgba(0, 0, 0, 0.23)",
     },
     "& .MuiInputBase-input": {
-      color: "black",
+      borderColor: "rgba(0, 0, 0, 0.23)",
     },
     "&:hover": {
       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
@@ -33,10 +34,10 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
     borderColor: "transparent",
   },
   "&:hover .MuiOutlinedInput-notchedOutline": {
-    borderColor: "black",
+    borderColor: "rgba(0, 0, 0, 0.23)",
   },
   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-    borderColor: "black",
+    borderColor: "rgba(0, 0, 0, 0.23)",
   },
 }));
 
@@ -53,11 +54,11 @@ const SearchBar = () => {
   const handleSearch = async () => {
     setSearchResults([]);
     if (!searchTerm.trim()) {
-      alert("No se ingresó un término de búsqueda.");
+      CustomSweetAlertError('No se ingresó ningun término de búsqueda');
       return;
     }
     try {
-      const data = await DrugHandler.getAllDrugs();
+      const data = await DrugHandler.getAllDrugs(searchTerm);
       const drugsArray = [];
 
       const transformedResults = data.map((item) => {
@@ -95,6 +96,7 @@ const SearchBar = () => {
       <CustomTextField
         className="my-custom-textfield"
         label="Buscar principio activo"
+        placeholder="busca un principio activo.."
         variant="outlined"
         fullWidth
         size="small"

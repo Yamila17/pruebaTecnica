@@ -2,8 +2,8 @@ import DrugService from "../services/DrugService";
 
 
 export const DrugHandler = {
-    async getAllDrugs() {
-        let drugs = await DrugService.searchDrugs()
+    async getAllDrugs(searchTerm) {
+        let drugs = await DrugService.searchDrugs(searchTerm)
         return drugs;
     },
     async getDrugByapplicationNumber(applicationNumber){

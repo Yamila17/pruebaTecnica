@@ -1,17 +1,16 @@
 import axios from "axios";
+import {CustomSweetAlertError} from './../components/alertComponent/AlertComponent'
 
 const DrugService = {
   searchDrugs: async (searchTerm) => {
-    const searchTermEncoded = encodeURIComponent(
-      `products.brand_name:"${encodeURIComponent(searchTerm)}"`
-    );
+    const searchTermEncoded = encodeURIComponent(searchTerm);
 
     try {
       const response = await axios.get(
         "https://api.fda.gov/drug/drugsfda.json",
         {
           params: {
-            search: searchTermEncoded,
+            search: `products.active_ingredients.name:"${searchTermEncoded}"`,
             limit: 50,
           },
           headers: {
@@ -32,7 +31,7 @@ const DrugService = {
         return [];
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      CustomSweetAlertError('No se encontraron principios activos con ese nombre.');
       return [];
     }
   },
@@ -62,7 +61,8 @@ const DrugService = {
         return null;
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error occurred:", error)
+      CustomSweetAlertError('no se encuentra ninguna coincidencia');
       return null;
     }
   }

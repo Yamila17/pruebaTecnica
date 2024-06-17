@@ -1,4 +1,11 @@
 import * as React from "react";
+import { Grid } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Collapse from "@mui/material/Collapse";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography"
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -40,8 +47,29 @@ const RoundedTableContainer = styled(TableContainer)({
 });
 
 const TableSubmissions = ({ submissions = [] }) => {
+  const [open, setOpen] = React.useState(false);
   return (
     <RoundedTableContainer>
+      <Grid container alignItems="center" spacing={1}>
+      <Grid item>
+        <IconButton
+          style={{ backgroundColor: "#8BDFA3" }}
+          aria-label="expand row"
+          size="small"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </IconButton>
+      </Grid>
+      <Grid item>
+        <Typography variant="h6" component="div">
+          SUBMISSIONS
+        </Typography>
+      </Grid>
+    </Grid>
+
+    <Collapse in={open} timeout="auto" unmountOnExit>
+    <Box sx={{ margin: 1, overflowX: 'auto' }}>
       <Table sx={{ minWidth: 650}} aria-label="simple table" >
         <TableHead>
           <StyledTableRow>
@@ -78,6 +106,8 @@ const TableSubmissions = ({ submissions = [] }) => {
           ))}
         </TableBody>
       </Table>
+      </Box>
+      </Collapse>
     </RoundedTableContainer>
   );
 };
