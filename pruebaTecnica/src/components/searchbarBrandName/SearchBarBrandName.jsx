@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SearchBarBrandName.css";
 import { useSearch } from "../../context/SearchContext";
 import { TextField } from "@mui/material";
 import { styled } from "@mui/system";
@@ -41,7 +42,7 @@ const CustomTextField = styled(TextField)(() => ({
   },
 }));
 
-const SearchBar = () => {
+const SearchBarBrandName = () => {
   const { setSearchResults } = useSearch();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -58,7 +59,7 @@ const SearchBar = () => {
       return;
     }
     try {
-      const data = await DrugHandler.searchDrugByActiveIngredient(searchTerm);
+      const data = await DrugHandler.searchDrugByBrandName(searchTerm);
       const drugsArray = [];
 
       const transformedResults = data.map((item) => {
@@ -91,12 +92,12 @@ const SearchBar = () => {
     setSearchTerm("");
     setResults([]);
   };
+
   return (
     <>
       <CustomTextField
         className="my-custom-textfield"
-        label="Buscar principio activo"
-        placeholder="busca un principio activo.."
+        label="Buscar nombre comercial"
         variant="outlined"
         fullWidth
         size="small"
@@ -122,7 +123,7 @@ const SearchBar = () => {
         onKeyDown={handleKeyDown}
       />
     </>
-  );
+  )
 };
 
-export default SearchBar;
+export default SearchBarBrandName;

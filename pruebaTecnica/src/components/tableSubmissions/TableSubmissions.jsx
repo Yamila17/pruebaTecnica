@@ -63,7 +63,7 @@ const TableSubmissions = ({ submissions = [] }) => {
       </Grid>
       <Grid item>
         <Typography variant="h6" component="div">
-          SUBMISSIONS
+         INFORMACIÓN SOBRE ENVÍOS/PRESENTACIONES
         </Typography>
       </Grid>
     </Grid>

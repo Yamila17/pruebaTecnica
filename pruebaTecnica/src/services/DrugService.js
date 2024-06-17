@@ -2,7 +2,7 @@ import axios from "axios";
 import {CustomSweetAlertError} from './../components/alertComponent/AlertComponent'
 
 const DrugService = {
-  searchDrugs: async (searchTerm) => {
+  searchDrugByActiveIngredient: async (searchTerm) => {
     const searchTermEncoded = encodeURIComponent(searchTerm);
 
     try {
@@ -32,6 +32,40 @@ const DrugService = {
       }
     } catch (error) {
       CustomSweetAlertError('No se encontraron principios activos con ese nombre.');
+      return [];
+    }
+  },
+
+  searchDrugByBrandName: async (brandName) => {
+    const searchTermEncoded = encodeURIComponent(brandName);
+
+    try {
+      const response = await axios.get(
+        "https://api.fda.gov/drug/drugsfda.json",
+        {
+          params: {
+            search: `products.brand_name:"${searchTermEncoded}"`,
+            limit: 50,
+          },
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (
+        response.data &&
+        response.data.results &&
+        Array.isArray(response.data.results)
+      ) {
+        return response.data.results;
+      } else {
+        console.error('La respuesta no contiene la propiedad "results"');
+        return [];
+      }
+    } catch (error) {
+      CustomSweetAlertError('No se encontró ese nombre comercial.');
       return [];
     }
   },

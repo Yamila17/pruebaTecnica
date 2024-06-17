@@ -63,7 +63,7 @@ const TableProduct = ({ products = [] }) => {
       </Grid>
       <Grid item>
         <Typography variant="h6" component="div">
-          INFORMACION DEL PRODUCTO
+          MÁS INFORMACION DEL PRODUCTO
         </Typography>
       </Grid>
     </Grid>
