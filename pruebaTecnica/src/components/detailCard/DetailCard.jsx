@@ -100,7 +100,7 @@ const DetailCard = () => {
   return (
     <>
       <TableSubmissions submissions={drugDetail.submissions} />
-      <TableProduct products={drugDetail.products} />
+      {/* <TableProduct products={drugDetail.products} /> */}
     </>
   );
 };

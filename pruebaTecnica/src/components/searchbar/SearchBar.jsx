@@ -1,26 +1,65 @@
 import React, { useState } from "react";
-import { Button, TextField} from "@mui/material";
-import Drug from '../../models/Drug'
+import { useSearch } from "../../context/SearchContext";
+import { TextField } from "@mui/material";
+import { styled } from "@mui/system";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from "@mui/icons-material/Clear";
+import Drug from "../../models/Drug";
 import DrugActiveIngredient from "../../models/DrugActiveIngredient";
-import SimpleCard from "../simpleCard/SimpleCard";
 import { DrugHandler } from "../../handler/DrugHandler";
 
+const CustomTextField = styled(TextField)(({ theme }) => ({
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "white",
+    "& fieldset": {
+      borderColor: "transparent",
+    },
+    "&:hover fieldset": {
+      borderColor: "black",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "black",
+    },
+    "& .MuiInputBase-input": {
+      color: "black",
+    },
+    "&:hover": {
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+    },
+  },
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderColor: "transparent",
+  },
+  "&:hover .MuiOutlinedInput-notchedOutline": {
+    borderColor: "black",
+  },
+  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "black",
+  },
+}));
+
 const SearchBar = () => {
+  const { setSearchResults } = useSearch();
   const [searchTerm, setSearchTerm] = useState("");
-  const [results, setResults] = useState([]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   const handleSearch = async () => {
-    setResults([]);
+    setSearchResults([]);
     if (!searchTerm.trim()) {
-      console.log("No se ingresó un término de búsqueda.");
+      alert("No se ingresó un término de búsqueda.");
       return;
     }
-
     try {
-      
-      const data = await DrugHandler.getAllDrugs()
+      const data = await DrugHandler.getAllDrugs();
       const drugsArray = [];
-      
+
       const transformedResults = data.map((item) => {
         const applicationNumber = item.application_number;
         const sponsorName = item.sponsor_name;
@@ -42,39 +81,45 @@ const SearchBar = () => {
         drugsArray.push(drug);
       });
 
-      setResults(drugsArray);
-      
+      setSearchResults(drugsArray);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
+  const handleDelete = () => {
+    setSearchTerm("");
+    setResults([]);
+  };
   return (
-    <div>
-      <TextField 
+    <>
+      <CustomTextField
+        className="my-custom-textfield"
         label="Buscar principio activo"
         variant="outlined"
         fullWidth
+        size="small"
         value={searchTerm}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton edge="end" aria-label="clear">
+                <ClearIcon onClick={() => handleDelete()} />
+              </IconButton>
+              <IconButton edge="end" aria-label="search">
+                <SearchIcon onClick={() => handleSearch()} />
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
         onChange={(e) => {
           setSearchTerm(e.target.value);
           if (!e.target.value.trim()) {
             setResults([]);
           }
         }}
+        onKeyDown={handleKeyDown}
       />
-      <Button onClick={() => handleSearch()}>Buscar</Button>
-      { results.map((item, index) => (
-        
-        <SimpleCard
-          variant="outlined"
-          key={index}
-          applicationNumber = {item.applicationNumber}
-          brandName={item.brandName}
-          sponsorName={item.sponsorName}
-        />
-      ))}
-    </div>
+    </>
   );
 };
 
