@@ -17,7 +17,7 @@ const SimpleCard = ({ applicationNumber, brandName, sponsorName }) => {
       <CardContent>
         <Grid container spacing={2} direction="column">
           <Grid item xs={12}>
-            <CardHeader>
+            <CardHeader >
               <CardMedia
                 component="img"
                 height="194"
@@ -43,9 +43,11 @@ const SimpleCard = ({ applicationNumber, brandName, sponsorName }) => {
         </Grid>
       </CardContent>
       <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
+      <Link  to={`/drug/${applicationNumber}`} style={{ textDecoration: 'none', width: '100%'  }}>
       <button className="custom-button" >VER MÁS
           <ArrowForwardIosIcon fontSize="0.5em"/>
       </button>
+      </Link>
       </Container>
     </Card>
   );
