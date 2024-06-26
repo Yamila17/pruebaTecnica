@@ -22,7 +22,7 @@ import { CardMedia } from "@mui/material";
 
 const DetailCard = () => {
   const { applicationNumber } = useParams();
-  const openFda = {};
+  let openFda = {};
   const [drugDetail, setDrugDetail] = useState({});
 
   useEffect(() => {
